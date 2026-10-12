@@ -1,53 +1,43 @@
 ---
-name: deep-research
-description: Turn your agent into a research analyst — decomposes questions, searches multiple sources, cross-verifies claims, and delivers a cited, structured report. Use when the user needs thorough research on any topic.
+name: idea-to-mvp
+description: Turn a one-sentence idea into a working MVP — picks the stack, scaffolds the project, writes runnable core code, and hands you run instructions. Use when the user describes an idea and wants a working prototype.
 ---
 
-# Deep Research 🔍
+# Idea to MVP 🚀
 
-Your agent, but as a research analyst with citations.
+One vague idea in, one working MVP out.
 
 ## Workflow
 
-1. **Decompose.** Break the question into 3-6 sub-questions that can be investigated independently. Show the plan briefly before executing.
+1. **Sharpen the idea.** If the request is vague, ask at most 3 sharp questions before writing any code:
+   - Who is it for?
+   - What is the ONE core action the MVP must do?
+   - Web app, CLI, or script?
+   
+   If the user already answered these implicitly, skip the questions and decide.
 
-2. **Search wide.** For each sub-question, consult multiple independent sources: official docs, primary sources, reputable articles, papers, community discussions. Record every source URL as you go.
+2. **Pick the stack** (sensible defaults, one line of justification each):
+   - Web app → Next.js or Vite + TypeScript
+   - CLI → Node.js or Python
+   - Simple automation → Python script
+   
+   State the pick and why in one sentence. Don't offer 5 options.
 
-3. **Cross-verify.** For each key claim:
-   - ✅ Corroborated by 2+ independent sources → state confidently, cite both
-   - ⚠️ Sources conflict → present both sides with citations, note which is more recent/authoritative
-   - ❓ Single weak source → flag as uncertain
-   - 🕳️ No source found → say "unknown", never fill the gap with a guess
+3. **Scaffold for real.** Create the project with:
+   - Working core feature code — runnable, not `// TODO: implement` stubs
+   - Sensible project structure (`src/`, routes, components as needed)
+   - `.gitignore`, dependency manifest, README with run instructions
+   - Basic error handling on the happy path's failure modes
 
-4. **Deliver the report** in this structure:
-
-```markdown
-## TL;DR
-3-5 sentence bottom line.
-
-## Findings
-### <sub-question>
-- claim [1][2]
-...
-
-## Conflicts & Caveats
-- ...
-
-## What's still unknown
-- ...
-
-## Recommendation
-...
-
-## Sources
-[1] url — why this source is credible
-...
-```
+4. **Hand over.** Output:
+   - 📁 File tree
+   - ▶️ How to run (exact commands)
+   - ✅ What's real vs. 🚧 what's stubbed
+   - 🔜 3 suggested next features, ordered by value
 
 ## Rules
 
-- Every factual claim carries a citation. No citation → rephrase as analysis or drop it.
-- Distinguish **fact** (sourced), **inference** (your reasoning, labeled as such), and **unknown**.
-- Recency matters: prefer the newest authoritative source; note when sources are dated.
-- If the topic needs 20+ sources, summarize themes per sub-question instead of dumping links.
-- Language: match the user's language for the report; keep source titles in original language.
+- Runnable beats beautiful. A working ugly MVP beats a gorgeous scaffold with no logic.
+- Don't add auth, payments, or databases unless the core idea needs them — say what you skipped and why.
+- Keep dependencies minimal and mainstream.
+- If the idea is too big for an MVP, cut scope explicitly and say what you cut.
