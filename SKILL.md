@@ -1,52 +1,37 @@
 ---
-name: repo-tour
-description: Understand any repository in 10 minutes — maps the architecture, traces core flows end-to-end, and tells you exactly where to start. Use when the user points at an unfamiliar codebase and wants to get oriented fast.
+name: paper-to-code
+description: Turn an academic paper into running code — extracts the core algorithm, maps equations to implementation, and delivers tested code with paper↔code traceability. Use when the user shares a paper (arXiv link, PDF, or text) and wants an implementation.
 ---
 
-# Repo Tour 🗺️
+# Paper to Code 📄
 
-Drop into any repo. Ten minutes later, you know it.
+Paper in, running code out — with every line traceable to the paper.
 
 ## Workflow
 
-1. **Map the territory** (read, don't guess):
-   - Tech stack from manifests (`package.json`, `pyproject.toml`, `go.mod`, …)
-   - Entry points (main files, route registrations, CLI definitions)
-   - Directory layout — what lives where, in one line each
-   - README/docs for the project's own description of itself
+1. **Read the paper.** Get it from the arXiv link, PDF, or pasted text. Focus on: abstract, method section, key equations, algorithm pseudocode, hyperparameters, evaluation setup. If you can't access the full text, say so and work from what's available.
 
-2. **Trace 1-2 core flows end-to-end.** Pick the flows that define the project (e.g. "HTTP request → response", "CLI command → output", "event → handler"). Follow the actual code path and note the key functions/files at each hop.
+2. **Extract the blueprint.** Before coding, write down:
+   - Core algorithm in 3-5 bullet steps
+   - Inputs → outputs with shapes/types
+   - Key equations numbered as in the paper (e.g. "Eq. 3, §3.2")
+   - Hyperparameters and their reported values
+   - What the paper evaluates and how
 
-3. **Deliver the tour** in this scannable format:
+3. **Implement faithfully.** Write clean, runnable code where:
+   - Structure mirrors the paper's structure (same section order where sensible)
+   - Every non-trivial block has a comment citing its source: `# Eq. 3 (§3.2) — attention weights`
+   - A runnable example/demo is included (synthetic data is fine)
+   - A README maps code files ↔ paper sections
 
-```markdown
-## 🗺️ <repo> in 10 minutes
-
-**One-liner:** what this project does.
-
-**Stack:** …
-
-**Architecture:**
-<ASCII diagram: 5-10 boxes max>
-
-**Key files:**
-| File | Role |
-| ---- | ---- |
-| … | … |
-
-**Core flow:** <name>
-1. `file.ts:12` — …
-2. …
-
-**🚀 Start here:** the 3 files to read first, in order.
-**🔧 Make your first change:** the safest, most illustrative place to edit.
-**▶️ Run it:** exact commands.
-```
+4. **Be honest about gaps.** End with a fidelity note:
+   - ✅ Faithful: …
+   - ⚠️ Simplified: … (and why — e.g. "training loop replaced with inference-only demo")
+   - ❓ Unclear in paper: … (ambiguities you had to resolve, and your choice)
 
 ## Rules
 
-- Verify by reading code. If you inferred something, label it "(inferred)".
-- ASCII diagram max 10 boxes — if it doesn't fit, you're showing too much.
-- "Start here" must be 3 files, ordered — not "browse the src directory".
-- Keep the whole tour scannable in ~2 minutes of reading; link to code, don't paste walls of it.
-- If the repo is huge (>500 files), tour the core module only and say which parts you skipped.
+- Never hallucinate results or claim the implementation reproduces the paper's numbers unless you actually ran the evaluation.
+- Prefer clarity over cleverness — this code is for learning, mirror the math.
+- If the paper has official code, mention it and explain how yours differs (e.g. "minimal single-file version").
+- Keep dependencies light (numpy/PyTorch-level, not exotic).
