@@ -1,37 +1,53 @@
 ---
-name: paper-to-code
-description: Turn an academic paper into running code — extracts the core algorithm, maps equations to implementation, and delivers tested code with paper↔code traceability. Use when the user shares a paper (arXiv link, PDF, or text) and wants an implementation.
+name: deep-research
+description: Turn your agent into a research analyst — decomposes questions, searches multiple sources, cross-verifies claims, and delivers a cited, structured report. Use when the user needs thorough research on any topic.
 ---
 
-# Paper to Code 📄
+# Deep Research 🔍
 
-Paper in, running code out — with every line traceable to the paper.
+Your agent, but as a research analyst with citations.
 
 ## Workflow
 
-1. **Read the paper.** Get it from the arXiv link, PDF, or pasted text. Focus on: abstract, method section, key equations, algorithm pseudocode, hyperparameters, evaluation setup. If you can't access the full text, say so and work from what's available.
+1. **Decompose.** Break the question into 3-6 sub-questions that can be investigated independently. Show the plan briefly before executing.
 
-2. **Extract the blueprint.** Before coding, write down:
-   - Core algorithm in 3-5 bullet steps
-   - Inputs → outputs with shapes/types
-   - Key equations numbered as in the paper (e.g. "Eq. 3, §3.2")
-   - Hyperparameters and their reported values
-   - What the paper evaluates and how
+2. **Search wide.** For each sub-question, consult multiple independent sources: official docs, primary sources, reputable articles, papers, community discussions. Record every source URL as you go.
 
-3. **Implement faithfully.** Write clean, runnable code where:
-   - Structure mirrors the paper's structure (same section order where sensible)
-   - Every non-trivial block has a comment citing its source: `# Eq. 3 (§3.2) — attention weights`
-   - A runnable example/demo is included (synthetic data is fine)
-   - A README maps code files ↔ paper sections
+3. **Cross-verify.** For each key claim:
+   - ✅ Corroborated by 2+ independent sources → state confidently, cite both
+   - ⚠️ Sources conflict → present both sides with citations, note which is more recent/authoritative
+   - ❓ Single weak source → flag as uncertain
+   - 🕳️ No source found → say "unknown", never fill the gap with a guess
 
-4. **Be honest about gaps.** End with a fidelity note:
-   - ✅ Faithful: …
-   - ⚠️ Simplified: … (and why — e.g. "training loop replaced with inference-only demo")
-   - ❓ Unclear in paper: … (ambiguities you had to resolve, and your choice)
+4. **Deliver the report** in this structure:
+
+```markdown
+## TL;DR
+3-5 sentence bottom line.
+
+## Findings
+### <sub-question>
+- claim [1][2]
+...
+
+## Conflicts & Caveats
+- ...
+
+## What's still unknown
+- ...
+
+## Recommendation
+...
+
+## Sources
+[1] url — why this source is credible
+...
+```
 
 ## Rules
 
-- Never hallucinate results or claim the implementation reproduces the paper's numbers unless you actually ran the evaluation.
-- Prefer clarity over cleverness — this code is for learning, mirror the math.
-- If the paper has official code, mention it and explain how yours differs (e.g. "minimal single-file version").
-- Keep dependencies light (numpy/PyTorch-level, not exotic).
+- Every factual claim carries a citation. No citation → rephrase as analysis or drop it.
+- Distinguish **fact** (sourced), **inference** (your reasoning, labeled as such), and **unknown**.
+- Recency matters: prefer the newest authoritative source; note when sources are dated.
+- If the topic needs 20+ sources, summarize themes per sub-question instead of dumping links.
+- Language: match the user's language for the report; keep source titles in original language.
