@@ -1,54 +1,56 @@
-# 🤖 agent-team
+# 🚀 idea-to-mvp
 
-**One task, a team of agents. 大任务自动拆分、多 agent 并行 — *agent-team is all you need.***
+**Turn one sentence into a working MVP. 一句话想法 → 可运行的 MVP — *idea-to-mvp is all you need.***
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 ![Skill](https://img.shields.io/badge/skill-Claude%20Code%20%7C%20Cursor%20%7C%20Copilot-blue)
 
 ## ✨ What it does
 
-Hand your agent a task that's too big for one straight shot. It decomposes it into **truly independent** subtasks, assigns roles (`researcher`, `implementer`, `reviewer`…), dispatches them **in parallel**, then synthesizes everything into one coherent result — conflicts resolved, final review pass included.
+You describe an idea in one sentence. Your agent picks the stack, scaffolds the project, writes **runnable** core code, and hands you exact run instructions. No `// TODO` stubs, no 5-option questionnaires.
 
 ```
-you: "research 3 competitors, summarize each, and compare pricing"
-agent: ✂️ 4 subtasks → 🤖 parallel dispatch → 🧩 synthesis + review
+you: "a habit tracker with streaks"
+agent: 📁 file tree + ▶️ npm run dev + ✅ what's real + 🔜 next features
 ```
 
 ## 📦 Install
 
+Copy `SKILL.md` into your skills folder:
+
 ```bash
 # Claude Code
-mkdir -p ~/.claude/skills/agent-team && cp SKILL.md ~/.claude/skills/agent-team/
+mkdir -p ~/.claude/skills/idea-to-mvp && cp SKILL.md ~/.claude/skills/idea-to-mvp/
 
 # Cursor (project-level)
-mkdir -p .cursor/skills/agent-team && cp SKILL.md .cursor/skills/agent-team/
+mkdir -p .cursor/skills/idea-to-mvp && cp SKILL.md .cursor/skills/idea-to-mvp/
 ```
+
+Then just say: *"build me an MVP for …"*
 
 ## 🎯 How it works
 
-1. **✂️ Decomposes** — 2-5 independent subtasks, each with inputs + done-criteria
-2. **🎭 Assigns roles** — researcher / implementer / reviewer / writer / tester
-3. **🚀 Dispatches in parallel** — partitioned by file/directory, scope-guarded
-4. **🧩 Synthesizes** — merges, resolves conflicts explicitly, one final review pass
+1. **🔪 Sharpens** the idea — at most 3 questions (who / core action / platform)
+2. **🧱 Picks** a mainstream stack with one line of justification
+3. **⚙️ Scaffolds** real working code — happy path fully runnable
+4. **📋 Hands over** — file tree, run commands, real-vs-stubbed, next 3 features
 
-## 🧭 Ground rules
+## 🧭 Scope discipline
 
-- Independence is non-negotiable — dependent work becomes phases, not subtasks
-- Max 5 parallel agents; done-criteria in writing before dispatch
-- Never ships 5 disconnected outputs — synthesis is the whole point
+Won't silently add auth, payments, or databases. If your idea needs cutting down to MVP size, it tells you exactly what got cut.
 
 ---
 
 ## 🇨🇳 中文介绍
 
-**一个任务，一支 agent 小队。** 大任务自动拆成真正独立的子任务，分配角色并行开干，最后汇总成一份连贯的结果。
+**一句话想法 → 可运行的 MVP。** 把想法丢给 agent，它帮你选技术栈、搭项目结构、写出**真正能跑**的核心代码，最后给你运行命令和后续规划。
 
-- ✂️ 拆：2-5 个独立子任务，每个写明输入和完成标准
-- 🎭 分角色：researcher / implementer / reviewer / writer / tester
-- 🚀 并行派发：按文件/目录分区，互不踩脚
-- 🧩 汇总：合并结果、显式解决冲突、最后再过一遍 reviewer
+- 🔪 最多问 3 个关键问题，不啰嗦
+- 🧱 技术栈只选主流的，并一句话说明理由
+- ⚙️ 核心功能是真代码，不是 TODO 占位
+- 📋 交付：文件树、运行命令、已实现/未实现清单、下一步建议
 
-适合：竞品调研、技术选型、多模块开发、任何"一个人干太慢"的大任务。
+适合：想快速验证想法的独立开发者、黑客松选手、产品经理。
 
 ## 📄 License
 

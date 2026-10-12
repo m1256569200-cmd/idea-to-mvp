@@ -1,35 +1,52 @@
 ---
-name: agent-team
-description: Turn one big task into a coordinated team of agents — decomposes work, assigns roles, runs subtasks in parallel, then synthesizes the results. Use when a task is too big for one straight shot and splits into independent parts.
+name: repo-tour
+description: Understand any repository in 10 minutes — maps the architecture, traces core flows end-to-end, and tells you exactly where to start. Use when the user points at an unfamiliar codebase and wants to get oriented fast.
 ---
 
-# Agent Team 🤖
+# Repo Tour 🗺️
 
-One task in. A team of agents on it. One synthesized result out.
+Drop into any repo. Ten minutes later, you know it.
 
 ## Workflow
 
-1. **Decompose.** Break the task into subtasks that are genuinely independent — each needs clear inputs, a definition of done, and no dependency on another subtask's output. If everything depends on everything, say so and don't force parallelism. Aim for 2-5 subtasks.
+1. **Map the territory** (read, don't guess):
+   - Tech stack from manifests (`package.json`, `pyproject.toml`, `go.mod`, …)
+   - Entry points (main files, route registrations, CLI definitions)
+   - Directory layout — what lives where, in one line each
+   - README/docs for the project's own description of itself
 
-2. **Assign roles.** Give each subtask a role that fits: `researcher` (gather facts), `implementer` (write code), `reviewer` (critique), `writer` (docs), `tester` (verify). One role per subtask, stated up front.
+2. **Trace 1-2 core flows end-to-end.** Pick the flows that define the project (e.g. "HTTP request → response", "CLI command → output", "event → handler"). Follow the actual code path and note the key functions/files at each hop.
 
-3. **Dispatch in parallel.** Launch all subtasks together with:
-   - The exact slice of work (not "help with the project")
-   - Its inputs and done-criteria
-   - What NOT to touch (scope guard)
-   
-   Subagents must not step on each other's files — partition the work by file/directory.
+3. **Deliver the tour** in this scannable format:
 
-4. **Synthesize.** When all return:
-   - Merge the outputs into one coherent result
-   - Resolve conflicts explicitly (state what conflicted and which resolution you picked)
-   - Run one final `reviewer` pass over the combined result
-   - Report: what each agent did (1 line each) + the unified outcome
+```markdown
+## 🗺️ <repo> in 10 minutes
+
+**One-liner:** what this project does.
+
+**Stack:** …
+
+**Architecture:**
+<ASCII diagram: 5-10 boxes max>
+
+**Key files:**
+| File | Role |
+| ---- | ---- |
+| … | … |
+
+**Core flow:** <name>
+1. `file.ts:12` — …
+2. …
+
+**🚀 Start here:** the 3 files to read first, in order.
+**🔧 Make your first change:** the safest, most illustrative place to edit.
+**▶️ Run it:** exact commands.
+```
 
 ## Rules
 
-- Independence is non-negotiable. A subtask that needs another's output is not a subtask — it's a phase. Sequence phases, parallelize within them.
-- Cap at 5 parallel agents. More than that and coordination costs exceed the gains.
-- Every subtask gets done-criteria in writing before dispatch. "Do your best" is not a criterion.
-- If a subtask fails, retry it once with narrower scope before giving up on it — and say so in the report.
-- Never present 5 disconnected outputs as the final answer. Synthesis is the job.
+- Verify by reading code. If you inferred something, label it "(inferred)".
+- ASCII diagram max 10 boxes — if it doesn't fit, you're showing too much.
+- "Start here" must be 3 files, ordered — not "browse the src directory".
+- Keep the whole tour scannable in ~2 minutes of reading; link to code, don't paste walls of it.
+- If the repo is huge (>500 files), tour the core module only and say which parts you skipped.
